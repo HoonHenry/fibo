@@ -15,3 +15,12 @@ after_success:
   - docker build -t dreampath88/mul-nginx ./nginx
   - docker build -t dreampath88/mul-server ./server
   - docker build -t dreampath88/mul-worker ./worker
+
+  # Log in to the docker hub CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take images and push them to docker hub
+  - docker push dreampath88/mul-client 
+  - docker push dreampath88/mul-nginx 
+  - docker push dreampath88/mul-server 
+  - docker push dreampath88/mul-worker 
